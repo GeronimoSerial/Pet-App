@@ -1,0 +1,90 @@
+<div class="card flex-center-center">
+  <div class="card-styling align-text">
+    <div class="logo-div flex-center-center">
+      <img class="logo-image" src="./assets/pet-logo.png" />
+    </div>
+    <div class="flex-center-center">
+      <form [formGroup]="form" (ngSubmit)="form.valid && registerUser()" class="form-styles">
+
+        <div class="flex-around-center">
+
+          <div class="grid-inputs">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input matInput type="name" formControlName="name" />
+              <mat-error *ngIf="form.controls['name'].hasError('required')">
+                Name is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Lastname</mat-label>
+              <input matInput type="text" formControlName="lastName" />
+              <mat-error *ngIf="form.controls['lastName'].hasError('required')">
+                Lastname is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Birthday</mat-label>
+              <input matInput [matDatepicker]="datepicker" formControlName="birthDay">
+              <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+              <mat-datepicker #datepicker>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>Cancel</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+              <mat-error *ngIf="form.controls['birthDay'].hasError('required')">
+                Birthday is required
+              </mat-error>
+            </mat-form-field>
+            <div class="flex-between-center">
+
+              <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email" />
+                <mat-error *ngIf="form.controls['email'].hasError('required')">
+                  Email is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Enter your password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="form.controls['password'].hasError('required')">
+                  Password is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Confirm your password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="form.controls['password'].hasError('required')">
+                  You must confirm your password
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="flex-center-center grid-inputs register">
+            
+            <button type="submit" mat-stroked-button color="primary">
+              Register
+            </button>
+            <div class="flex-center-center">
+            <mat-spinner [diameter]="35" *ngIf="loading"></mat-spinner>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
