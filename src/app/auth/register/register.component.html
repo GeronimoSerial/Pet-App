@@ -9,13 +9,12 @@
         <div class="flex-around-center">
 
           <div class="grid-inputs">
-            <mat-form-field appearance="outline">
-              <mat-label>Name</mat-label>
-              <input matInput type="name" formControlName="name" />
-              <mat-error *ngIf="form.controls['name'].hasError('required')">
+
+            <app-input [propertyName]="'Name'" inputValue="'name'" [formChild]="form" ></app-input>
+
+              <!-- <mat-error *ngIf="form.controls['name'].hasError('required')">
                 Name is required
-              </mat-error>
-            </mat-form-field>
+              </mat-error> -->
 
             <mat-form-field appearance="outline">
               <mat-label>Lastname</mat-label>
@@ -39,7 +38,7 @@
                 Birthday is required
               </mat-error>
             </mat-form-field>
-            <div class="flex-between-center">
+            <!-- <div class="flex-between-center"> -->
 
               <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
@@ -63,26 +62,33 @@
 
               <mat-form-field appearance="outline">
                 <mat-label>Confirm your password</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                <input matInput [type]="hide ? 'confirmPassword' : 'text'" formControlName="confirmPassword">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                   [attr.aria-pressed]="hide">
                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
-                <mat-error *ngIf="form.controls['password'].hasError('required')">
+                <mat-error *ngIf="form.controls['confirmPassword'].hasError('required')">
                   You must confirm your password
                 </mat-error>
               </mat-form-field>
-            </div>
+            <!-- </div> -->
           </div>
-          <div class="flex-center-center grid-inputs register">
-            
-            <button type="submit" mat-stroked-button color="primary">
-              Register
-            </button>
-            <div class="flex-center-center">
+          <div class="grid-inputs">
+            <img [src]="srcResult != null ? srcResult : './assets/blank-profile.png'" class ="profile-img">
+              <button type="button" mat-raised-button (click)="fileInput.click()">Choose a profile photo</button>
+              <input hidden (change)="onFileSelected($event)" type="file" #fileInput id="file" >
+             
+             
+              <button type="submit" mat-stroked-button color="primary">
+                Register
+             </button>
+          
+            </div>
+
+
+      
             <mat-spinner [diameter]="35" *ngIf="loading"></mat-spinner>
-            </div>
-          </div>
+
         </div>
       </form>
     </div>

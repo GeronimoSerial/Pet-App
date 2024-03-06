@@ -17,6 +17,7 @@ import {  MatProgressSpinnerModule  } from '@angular/material/progress-spinner';
 import {  MatDatepickerModule } from '@angular/material/datepicker';
 import {  MatNativeDateModule } from '@angular/material/core';
 import {  MatIconModule } from '@angular/material/icon';
+import { InputComponent } from './auth/modules/input/input.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import {  MatIconModule } from '@angular/material/icon';
     RegisterComponent,
     ForgotPasswordComponent,
     NotFoundComponent,
+    InputComponent,
  ],
   imports: [
     BrowserModule,

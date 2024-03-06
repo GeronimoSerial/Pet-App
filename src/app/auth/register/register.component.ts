@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -25,16 +27,33 @@ export class RegisterComponent {
 }
 
   registerUser(){
-    this.loading = true;
-    this.cancelSpinner();
+    // this.loading = true;
+    // this.cancelSpinner();
     console.log(this.form.value);
   }
+ 
+  onFileSelected(event: any){
+    const file: File =  event.target.files[0]
+    const reader = new FileReader();
+    
+    reader.readAsDataURL(file);
+    
+    reader.onload = (e: any) =>{
+      // const base64String: string = e.target.result;
+      this.srcResult = e.target.result;
 
-  cancelSpinner(){
-    setTimeout(() => {
-      this.loading = false;
-    },1500)
+      this.form.get('profilePhoto').setValue(this.srcResult)
+    }
+
+
   }
+
 }
+  // cancelSpinner(){
+  //   setTimeout(() => {
+  //     this.loading = false;
+  //   },1500);
+  // }
 
 
+ 

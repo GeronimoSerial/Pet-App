@@ -1,5 +1,14 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Component
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import {
+  User
+} from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +18,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
   form: FormGroup;
   loading = false;
+  userClass: User;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
@@ -20,14 +30,23 @@ export class LoginComponent {
   loginUser() {
     this.loading = true;
     this.cancelSpinner();
-    console.log(this.form);
-    console.log(this.form.value);
+    // console.log(this.form);
+    // console.log(this.form.value);
+    var userSession = localStorage.getItem('session')
+
+    if (userSession == null) {
+      localStorage.setItem('session', JSON.stringify(this.form.value));
+    } else {
+      this.userClass = JSON.parse('userSession')
+    }
+
+    localStorage.removeItem('session');
 
   }
 
-  cancelSpinner(){
+  cancelSpinner() {
     setTimeout(() => {
       this.loading = false;
-    },1500)
+    }, 1500)
   }
 }
