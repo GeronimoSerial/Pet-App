@@ -13,6 +13,7 @@ export class RegisterComponent {
   loading = false;
   srcResult: any;
   hide = true;
+formChild: any;
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       name: ['', Validators.required],
